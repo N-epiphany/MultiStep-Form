@@ -228,22 +228,27 @@ function setTotal() {
 function setTime(t) {
   return (time = t);
 }
-// Event listener for yearly/monthly switcher
-
+// Event listener for yearly/monthly switcher And changing Addon Price
 const planType = document.querySelector(".switch input");
-function updateAddonPrices() {
+// Function to update Addon Price according to the plan
+function updateAddonPrices(checked) {
+  const month = [1, 2, 2];
+  const year = [10, 20, 20];
   const addonPrices = document.querySelectorAll(".price");
-  addonPrices.forEach((price) => {
-    const priceValue = price.innerText.replace(/\D/g, "");
-    const newPrice = planType.checked
-      ? `$${priceValue * 10}/yr`
-      : `$${priceValue}/mo`;
-    price.innerText = newPrice;
-  });
-}
-planType.addEventListener("change", updateAddonPrices);
-// Event listener for yearly/monthly switcher to update plan details
 
+  addonPrices.forEach((price, index) => {
+    const priceValue = price.innerText.replace(/\D/g, "");
+    const newPrice = checked ? `$${year[index]}/yr` : `$${month[index]}/mo`;
+    price.innerText = "+" + newPrice;
+  });
+
+  setTime(checked);
+}
+
+planType.addEventListener("change", function () {
+  updateAddonPrices(this.checked);
+});
+// Updating data in plan card
 const planCards = document.querySelectorAll(".plan-card");
 function updatePlanDetails() {
   planCards.forEach((card) => {
@@ -279,5 +284,5 @@ function goToStep(stepNumber) {
 // Set onclick attribute for a button to navigate to step 2
 
 document
-  .querySelector(".selected-plan .prev-stp")
+  .querySelector(".selection-container .prev-stp")
   .setAttribute("onclick", "goToStep(3)");
