@@ -27,6 +27,6 @@ Your users should be able to:
 ## Deploying 
 
 
-- [Check Website](https://vercel.com/)
+- [Check Website](https://frontend-assignment-helper.vercel.app/)
 
 
